@@ -1,24 +1,18 @@
 import _ from "lodash";
 import React from "react";
+import fibonacci from '../lib/fibonacci'
+import FibonacciLine from './fibonacci-line'
 
 const Fibonacci = React.createClass({
   propTypes: {
     length: React.PropTypes.number.isRequired
   },
 
-  render: function () {
-    let twoBack = 0;
-    let oneBack = 0;
-    let current = 1;
+  render () {
     return (
       <div>
-        { _.times(this.props.length, (n) => {
-          twoBack = oneBack;
-          oneBack = current;
-          current = current + twoBack;
-          return (
-            <div key={n}>{current}</div>
-          );
+        {fibonacci.iterative(this.props.length).map(elem => {
+          return <FibonacciLine index={elem.key} value={elem.current} />
         })}
       </div>
     );
